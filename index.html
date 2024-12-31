@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +16,10 @@
         main {}
         header {
             border-bottom: 1px solid #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
         }
         .name {
             font-weight: 600;
@@ -25,78 +31,127 @@
             padding: 20px;
             background-color: #fff;
         }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <main>
         <header>
             <h2><span class="name">Account Vat</span></h2>
+            <button id="toggle-language-btn">Toggle Language</button>
         </header>
-        <div class="part">
-            <h1>Privacy Policy</h1>
-            <p>
-                Thank you for using <span class="name">Account Vat</span>. This Privacy Policy explains how we collect, use, and protect the personal information you provide when accessing our application for accounting and management purposes.
-            </p>
-        </div>
-        
-        <div class="part">
-            <h2>Information We Collect</h2>
-            <p>
-                <span class="name">Account Vat</span> may collect the following types of personal information:
-            </p>
-            <ul>
-                <li>Contact information (name, email address, phone number)</li>
-                <li>Account information (username, password)</li>
-                <li>Business details (accounting data, invoices, reports)</li>
-                <li>User registration details (for both admins and accountants)</li>
-                <li>Any feedback or inquiries provided through the app</li>
-            </ul>
-        </div>
-        
-        <div class="part">
-            <h2>How We Use Your Information</h2>
-            <p>
-                The information we collect is used for the following purposes:
-            </p>
-            <ul>
-                <li>To manage and maintain accountant and admin accounts</li>
-                <li>To provide accounting and financial services within the app</li>
-                <li>To allow users to register and manage their accounts</li>
-                <li>To improve our services and provide user support</li>
-                <li>To notify users of updates or relevant changes</li>
-            </ul>
-        </div>
-        
-        <div class="part">
-            <h2>Data Security</h2>
-            <p>
-                <span class="name">Account Vat</span> is committed to protecting your data. We use industry-standard security measures to ensure your information is safeguarded against unauthorized access, modification, or disclosure.
-            </p>
-        </div>
-        
-        <div class="part">
-            <h2>Third-Party Services</h2>
-            <p>
-                We may work with third-party services, such as payment processors or data analytics tools, to improve our app functionality. These providers may access limited personal information, but they are required to handle your data securely and only for purposes related to <span class="name">Account Vat</span>.
-            </p>
-        </div>
-        
-        <div class="part">
-            <h2>Changes to This Policy</h2>
-            <p>
-                <span class="name">Account Vat</span> reserves the right to update this Privacy Policy as needed. Changes will be posted on this page with a "last updated" date.
-            </p>
-        </div>
-        
-        <div class="part">
-            <h2>Contact Us</h2>
-            <p>
-                If you have any questions about this Privacy Policy, please reach out to us at mohaseb.vat@gmail.com.
-            </p>
-            <p>
-                Last updated: 2024
-            </p>
+        <div id="content">
+            <!-- Content will be dynamically loaded based on language -->
         </div>
     </main>
+
+    <script>
+        // Language configuration
+        const langQuery = new URLSearchParams(window.location.search).get("lang");
+        const supportedLanguages = ["en", "ar"];
+        const lang = supportedLanguages.includes(langQuery) ? langQuery : "en"; // Default to English
+
+        // Elements
+        const contentDiv = document.getElementById("content");
+        const toggleLanguageBtn = document.getElementById("toggle-language-btn");
+
+        // Privacy policy content in both languages
+        const privacyPolicy = {
+            en: `
+                <div class="part">
+                    <h1>Privacy Policy</h1>
+                    <p>Thank you for using <span class="name">Account Vat</span>. This Privacy Policy explains how we collect, use, and protect the personal information you provide when accessing our application for accounting and management purposes.</p>
+                </div>
+                <div class="part">
+                    <h2>Information We Collect</h2>
+                    <ul>
+                        <li>Contact information (name, email address, phone number)</li>
+                        <li>Account information (username, password)</li>
+                        <li>Business details (accounting data, invoices, reports)</li>
+                        <li>User registration details (for both admins and accountants)</li>
+                        <li>Any feedback or inquiries provided through the app</li>
+                    </ul>
+                </div>
+                <div class="part">
+                    <h2>How We Use Your Information</h2>
+                    <ul>
+                        <li>To manage and maintain accountant and admin accounts</li>
+                        <li>To provide accounting and financial services within the app</li>
+                        <li>To allow users to register and manage their accounts</li>
+                        <li>To improve our services and provide user support</li>
+                        <li>To notify users of updates or relevant changes</li>
+                    </ul>
+                </div>
+                <div class="part">
+                    <h2>Data Security</h2>
+                    <p><span class="name">Account Vat</span> is committed to protecting your data. We use industry-standard security measures to ensure your information is safeguarded against unauthorized access, modification, or disclosure.</p>
+                </div>
+                <div class="part">
+                    <h2>Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, please reach out to us at mohaseb.vat@gmail.com.</p>
+                    <p>Last updated: 2024</p>
+                </div>
+            `,
+            ar: `
+                <div class="part">
+                    <h1>سياسة الخصوصية</h1>
+                    <p>شكرًا لاستخدامكم <span class="name">حساب فواتير</span>. توضح سياسة الخصوصية هذه كيف نجمع المعلومات الشخصية ونستخدمها ونحميها عند استخدام تطبيقنا لأغراض المحاسبة والإدارة.</p>
+                </div>
+                <div class="part">
+                    <h2>المعلومات التي نجمعها</h2>
+                    <ul>
+                        <li>معلومات الاتصال (الاسم، البريد الإلكتروني، رقم الهاتف)</li>
+                        <li>معلومات الحساب (اسم المستخدم، كلمة المرور)</li>
+                        <li>تفاصيل النشاط التجاري (بيانات المحاسبة، الفواتير، التقارير)</li>
+                        <li>تفاصيل تسجيل المستخدمين (للإداريين والمحاسبين)</li>
+                        <li>أي ملاحظات أو استفسارات يتم تقديمها من خلال التطبيق</li>
+                    </ul>
+                </div>
+                <div class="part">
+                    <h2>كيف نستخدم معلوماتك</h2>
+                    <ul>
+                        <li>إدارة وصيانة حسابات الإداريين والمحاسبين</li>
+                        <li>تقديم خدمات المحاسبة والمالية داخل التطبيق</li>
+                        <li>السماح للمستخدمين بالتسجيل وإدارة حساباتهم</li>
+                        <li>تحسين خدماتنا وتقديم الدعم للمستخدمين</li>
+                        <li>إبلاغ المستخدمين بالتحديثات أو التغييرات ذات الصلة</li>
+                    </ul>
+                </div>
+                <div class="part">
+                    <h2>أمن البيانات</h2>
+                    <p><span class="name">حساب فواتير</span> ملتزم بحماية بياناتك. نحن نستخدم تدابير أمان قياسية لضمان حماية معلوماتك من الوصول غير المصرح به أو التعديل أو الإفشاء.</p>
+                </div>
+                <div class="part">
+                    <h2>تواصل معنا</h2>
+                    <p>إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى التواصل معنا على mohaseb.vat@gmail.com.</p>
+                    <p>آخر تحديث: 2024</p>
+                </div>
+            `
+        };
+
+        // Function to update content based on language
+        function updateContent(language) {
+            contentDiv.innerHTML = privacyPolicy[language] || privacyPolicy["en"];
+        }
+
+        // Toggle language button functionality
+        toggleLanguageBtn.addEventListener("click", () => {
+            const newLang = lang === "en" ? "ar" : "en";
+            window.location.search = `?lang=${newLang}`;
+        });
+
+        // Initial content load
+        updateContent(lang);
+    </script>
 </body>
 </html>
