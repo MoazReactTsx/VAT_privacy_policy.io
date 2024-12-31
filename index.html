@@ -48,7 +48,7 @@
     <main>
         <header>
             <h2><span class="name">Account Vat</span></h2>
-            <button id="toggle-language-btn">Toggle Language</button>
+            <button id="toggle-language-btn"></button>
         </header>
         <div id="content">
             <!-- Content will be dynamically loaded based on language -->
@@ -139,9 +139,10 @@
             `
         };
 
-        // Function to update content based on language
+        // Function to update content and button text based on language
         function updateContent(language) {
             contentDiv.innerHTML = privacyPolicy[language] || privacyPolicy["en"];
+            toggleLanguageBtn.textContent = language === "en" ? "العربية" : "English";
         }
 
         // Toggle language button functionality
